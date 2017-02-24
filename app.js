@@ -1,15 +1,9 @@
 "use strict";
 let express = require('express');
+let fortune = require('./lib/fortune');
 let app = express();
 let handlebars = require('express-handlebars')
     .create({ defaultLayout: 'main' });
-let fortuneCookies = [
-    "Conquer your fears or they will conquer you.",
-    "Rivers need springs.",
-    "Do not fear what you don't know.",
-    "You will have a pleasant surprise.",
-    "Whenever possible, keep it simple.",
-];
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('port', process.env.PORT || 3000);
@@ -22,8 +16,8 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
     // res.type('text/plain');
     // res.send('Ob compamy!');
-    let randomeFortune = fortuneCookies[Math.floor(Math.random() * fortuneCookies.length)];
-    res.render('about', { fortune: randomeFortune });
+    // let randomeFortune = fortuneCookies[Math.floor(Math.random() * fortuneCookies.length)];
+    res.render('about', { fortune: fortune.getFortune() });
 });
 app.use((req, res, next) => {
     //res.type('text/plain');
