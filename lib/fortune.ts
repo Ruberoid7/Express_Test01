@@ -37,7 +37,7 @@
         {
             guid:       "002",
             firstName: "Петр",
-            lastName: "Мошонкин",
+            lastName: "Шонкин",
             birthDay: new Date(1982, 11, 12),
             organization: "Уралхим",
             manager: "Пахом",
