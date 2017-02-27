@@ -35,6 +35,8 @@ app.set("port", process.env.PORT || 3000);
             (req: Request, res: Response) => {
                                       //  res.type('text/plain');
                                       //  res.send('WOW!');
+
+                console.log(req.url);
                                         res.render("home");
             }
         );
@@ -50,6 +52,15 @@ app.set("port", process.env.PORT || 3000);
                                         });
         }
     );
+
+    app.get("/headers", function(req,res) {
+                                        res.set("Content-Type", "text/plain");
+                                        let s = "";
+                                        for (let name in req.headers)
+                                            s += name + ": " + req.headers[name] + "\n";
+                                        res.send(s);
+                                    });
+
     app.get("/tours/hood-river",
         (req: Request, res: Response) =>
                                         res.render("tours/hood-river"));
@@ -62,9 +73,8 @@ app.set("port", process.env.PORT || 3000);
     app.use(
         (req: Request, res: Response, next: NextFunction) => {
                                         // res.type('text/plain');
-                                        res.status(404);
+                                        res.status(404).render("404");
                                         // res.send('404 - Ne naideno!');
-                                        res.render("404");
         }
     );
 
